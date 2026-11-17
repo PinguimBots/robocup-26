@@ -9,7 +9,7 @@ brain_node:
       number_of_players: 3
       
     robot:
-      robot_name: "" # When multiple robots exist, specify e.g. "robot0", "robot1"; leave empty for single robot
+      robot_name: "pinguim1" # When multiple robots exist, specify e.g. "robot0", "robot1"; leave empty for single robot
       robot_height: 0.8 # 1.12 for T1
       odom_factor: 0.8 # 1.2 for T1
       vx_factor: 0.50
@@ -129,4 +129,4 @@ brain_node:
         # depth_image_topic: "/camera/robot0_rgbd_camera/depth/image_raw" # simulated
         # depth_camera_info_topic: "/camera/robot0_rgbd_camera/depth/camera_info" # simulated
     
-    game_control_ip: "192.168.30.170"
+    game_control_ip: "192.168.1.1"
