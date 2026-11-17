@@ -10,8 +10,8 @@ brain_node:
       
     robot:
       robot_name: "pinguim1" # When multiple robots exist, specify e.g. "robot0", "robot1"; leave empty for single robot
-      robot_height: 0.8 # 1.12 for T1
-      odom_factor: 0.8 # 1.2 for T1
+      robot_height: 1.12 # 1.12 for T1
+      odom_factor: 1.2 # 1.2 for T1
       vx_factor: 0.50
       yaw_offset: 0.0
       vx_limit: 1.0
@@ -93,7 +93,7 @@ brain_node:
       chase_ao_safe_dist: 3.5
 
     RLVisionKick:
-      enableAutoVisualKick: true
+      enableAutoVisualKick: false
       autoVisualKickEnableDistMin: 0.2
       autoVisualKickEnableDistMax: 4.0
       autoVisualKickEnableAngle: 0.8
