@@ -36,7 +36,7 @@ Mapa completo do controle no firmware 1.8: [CONTROLE_FIRMWARE_1.8.md](CONTROLE_F
 
 1. Robô apoiado → **PREP** (`LT + Start` ou botão **P**) → no chão, firme → **WALK** (`RT + A`).
 2. Iniciar o programa.
-3. **LT + A** (cérebro): relocaliza **e** entra no modo futebol. Nunca pular.
+3. **LT + A** (cérebro): relocaliza **só com a cabeça** (as pernas não se mexem; o modo do firmware continua WALK). Nunca pular.
 4. Esperar o robô fixar o olhar na bola (se a cabeça ficar girando → problema de visão/calibração).
 5. **LT + B** (cérebro): estratégia automática (segue o GameController).
 6. **LT + X** (cérebro): devolve o controle manual (mexer o joystick para cancelar o último comando).
@@ -48,6 +48,8 @@ Mapa completo do controle no firmware 1.8: [CONTROLE_FIRMWARE_1.8.md](CONTROLE_F
 
 - Sequência de modos: **DAMP → PREP → WALK**. Voltar a DAMP (`LT + Back`) só com o robô apoiado.
 - Com o cérebro rodando, evitar `LT + Y` (no firmware é **Chutar**) e `A/B/X/Y` sozinhos (gestos).
+- Para testar **sem chute**: não usar `RB` (chuta), `LB` (persegue sem parar antes da bola) nem `LT + Y`, e não usar
+  GameController (sem o estado PLAY, o automático não decide chutar).
 - Reiniciar a placa de movimento desliga os motores: robô sentado, deitado ou no suporte.
 - Depois de mudar qualquer `config.yaml`, recompilar (`./scripts/build.sh`).
 - GameController: `team_id` igual nos dois lados, `player_id` único, IP do GameController correto.

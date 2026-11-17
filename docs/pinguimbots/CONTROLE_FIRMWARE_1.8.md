@@ -42,20 +42,28 @@ Não vêm do firmware: são lidos pelo `brain` do `robocup_public` e da demo 1.7
 
 | Botões | Ação |
 |---|---|
-| `LT + A` | Relocalizar (no `robocup_public`, também entra no modo futebol) |
-| `LT + B` | Estratégia automática (segue o GameController) |
-| `LT + X` | Cancelar o automático: para e centraliza a cabeça |
-| `LT + Y` | Trocar o papel (atacante ↔ goleiro) |
-| `LB` (segurando) | Assistência para perseguir a bola |
-| `RB` (segurando) | Assistência para chutar |
-| Analógicos | Assumem o controle manual |
+| Botões | `robocup_public` | Demo 1.7+ |
+|---|---|---|
+| `LT + A` | Relocalizar **só com a cabeça** (varre o campo e segue a bola); **as pernas não se mexem e o modo do firmware não muda** | Relocalizar **e** trocar para o modo futebol do firmware (`kSoccer`) |
+| `LT + B` | Estratégia automática (segue o GameController) | Idem |
+| `LT + X` | Cancelar o automático: para e centraliza a cabeça | Idem |
+| `LT + Y` | **Desativado** (comentado no código) | Trocar o papel (atacante ↔ goleiro) |
+| `LB` (segurando) | ⚠️ Persegue a bola **sem parar antes dela** (`stop_dist = 0`) | Idem |
+| `RB` (segurando) | ⚠️ **Chuta** (assistência de chute) | Idem |
+| Analógicos | Assumem o controle manual | Idem |
+
+> O `robocup_public` **joga no modo WALK normal**: as funções que ativam o modo futebol do firmware
+> (`walkMode()` / `robocupWalk()`, API `kEnableRobocupWalkMode`) existem em `robot_client.cpp`, mas **nunca são
+> chamadas**. Os chutes usam diretamente as APIs `kRLKickBall` / `kRLFancyKickBall`.
 
 > Na demo 1.7+, o `game.xml` já começa no automático (equivale a `LT + B`), sem esperar o botão.
 
 ## ⚠️ Conflitos (cérebro rodando + robô em WALK)
 
 Os dois conjuntos valem ao mesmo tempo:
-- **`LT + Y`**: no firmware é **Chutar**; no cérebro é **trocar o papel**. Evitar durante o jogo.
+- **`LT + Y`**: no firmware é **Chutar**. No `robocup_public` o cérebro não usa esse botão, então **o único efeito é o
+  chute do firmware**; na demo 1.7+ ele também troca o papel. Evitar sempre.
+- **`RB`** e **`LB`** (cérebro) podem chutar ou empurrar a bola: não usar quando não se quer chute.
 - **`A`, `B`, `X`, `Y` sozinhos** fazem gestos no firmware. Nos comandos `LT + A/B/X`, segurar o `LT` **antes** e soltar **depois** da letra.
 - **`LB` + direcionais**: danças no firmware; no cérebro, `LB` é perseguir a bola e os direcionais tocam sons.
 
