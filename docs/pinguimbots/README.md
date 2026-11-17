@@ -13,6 +13,7 @@ Documentação do time **PinguimBots** sobre o nosso Booster T1, mantida neste f
 | [ROBO_T1_ZED.md](ROBO_T1_ZED.md) | Como é o nosso robô (hardware, placas, câmera) e o que difere do T1 padrão |
 | [FIRMWARE_1.8_CORRECOES.md](FIRMWARE_1.8_CORRECOES.md) | Problemas encontrados após atualizar para o firmware 1.8.1.2 e como foram corrigidos (com reversão) |
 | [VERSOES_DO_CODIGO.md](VERSOES_DO_CODIGO.md) | Mapa das versões de código de futebol (qual funciona, qual está em teste) |
+| [CONTROLE_FIRMWARE_1.8.md](CONTROLE_FIRMWARE_1.8.md) | Mapa do controle no firmware 1.8 (oficial) + botões do cérebro do robocup e conflitos |
 | [OPERACAO.md](OPERACAO.md) | Como iniciar/parar cada versão sem conflito, sequência no campo, segurança |
 
 ## Situação atual (17/11/2026)
