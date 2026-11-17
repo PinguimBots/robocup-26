@@ -102,3 +102,44 @@ pactl set-default-sink alsa_output.usb-C-Media_Electronics_Inc._USB_Audio_Device
 **Desfazer:** `pactl set-default-sink alsa_output.platform-sound.analog-stereo`
 
 > Sem microfone, o agente de conversa não consegue ouvir (ver [ROBO_T1_ZED.md](ROBO_T1_ZED.md)).
+
+---
+
+## 6. Botões F e P das costas não mudavam o modo do robô
+
+**O que são:** a caixinha impressa em 3D acima da bateria, com dois botões marcados **P** (PREP) e **F**
+(modo futebol), é um **mini-teclado USB** (`HID 5131:2019`) ligado à placa de percepção. Quem lê as teclas é o
+serviço da Booster `booster-daemon-input` (`/opt/booster/DaemonInput/bin/booster_daemon_input`), que manda o
+comando para a placa de movimento pelo canal `rt/LocoApiTopic`. O botão **P** gera `key: 4` e o **F** gera `key: 2`.
+
+**Sintoma (17/11/2026):** os botões não faziam nada, mas o PREP pelo app e pelo controle (`LT + START`) funcionava.
+No log do serviço, as teclas chegavam, mas todo comando falhava:
+```
+booster_daemon_input: key: 4 1
+booster_daemon_input: Request failed: error = 100
+```
+
+**Causa:** o serviço roda **sem perfil de rede do FastDDS** e não encontrava o servidor de comandos (`error = 100` =
+sem resposta). Com o perfil da Booster (`/opt/booster/BoosterRos2/fastdds_profile.xml`), o mesmo pedido funciona.
+Não se sabe por que funcionava antes sem o perfil: o arquivo do serviço é de jul/2025 e não foi alterado.
+**O Wi-Fi não é a causa** (testado: falha também com o Wi-Fi excluído).
+
+**Diagnóstico:**
+```bash
+sudo evtest /dev/input/event5                          # teclas chegando? (KEY_1 / KEY_3)
+journalctl -u booster-daemon-input -n 20 --no-pager    # "Request failed: error = 100"?
+```
+
+**Correção (placa de percepção):** um arquivo novo que só acrescenta o perfil ao serviço, sem alterar o original:
+```bash
+sudo mkdir -p /etc/systemd/system/booster-daemon-input.service.d
+printf '[Service]\nEnvironment=FASTRTPS_DEFAULT_PROFILES_FILE=/opt/booster/BoosterRos2/fastdds_profile.xml\n' | sudo tee /etc/systemd/system/booster-daemon-input.service.d/PinguimBots_perfil_rede.conf
+sudo systemctl daemon-reload && sudo systemctl restart booster-daemon-input
+```
+**Verificação:** ao apertar P, o log da placa de movimento (`/var/log/booster/<boot>/motion/motion.log`) mostra
+`Received api request with id: 2000` e `exec switch to prepare`. Vale também após reiniciar.
+
+**Desfazer:**
+```bash
+sudo rm -r /etc/systemd/system/booster-daemon-input.service.d && sudo systemctl daemon-reload && sudo systemctl restart booster-daemon-input
+```

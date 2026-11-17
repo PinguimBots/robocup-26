@@ -22,6 +22,8 @@ Documentação do time **PinguimBots** sobre o nosso Booster T1, mantida neste f
 | Firmware | 1.8.1.2 (última versão que a Booster lançará para o T1) |
 | Câmera ZED 2i | ✅ funcionando (640×360, ~15 Hz) |
 | Visão do `robocup_public` (versão que já jogou) | ✅ detecta bola/pessoas com o firmware 1.8 |
-| Distância da bola (calibração) | ⏳ falta medir com a bola no chão |
+| Distância da bola (calibração) | ✅ erro de ~10 cm (17/11/2026, robô em pé, cabeça inclinada como no jogo) |
 | Movimento/chutes com firmware 1.8 | ⏳ falta testar |
+| Botões F/P das costas | ✅ corrigido em 17/11/2026 (ver FIRMWARE_1.8_CORRECOES.md, item 6) |
+| PREP pelo controle | ✅ `LT + START` (o `RT + Y` não existe mais no firmware 1.8) |
 | Demo oficial `sandbox/support_firmware_1.7+` | ⏳ planejada para teste em pasta separada |
