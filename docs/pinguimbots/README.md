@@ -14,6 +14,8 @@ Documentação do time **PinguimBots** sobre o nosso Booster T1, mantida neste f
 | [FIRMWARE_1.8_CORRECOES.md](FIRMWARE_1.8_CORRECOES.md) | Problemas encontrados após atualizar para o firmware 1.8.1.2 e como foram corrigidos (com reversão) |
 | [VERSOES_DO_CODIGO.md](VERSOES_DO_CODIGO.md) | Mapa das versões de código de futebol (qual funciona, qual está em teste) |
 | [CONTROLE_FIRMWARE_1.8.md](CONTROLE_FIRMWARE_1.8.md) | Mapa do controle no firmware 1.8 (oficial) + botões do cérebro do robocup e conflitos |
+| [TESTE_SEM_GAMECONTROLLER.md](TESTE_SEM_GAMECONTROLLER.md) | Roteiro: firmware 1.8 + `robocup_public`, só pelo controle, sem chute |
+| [TESTE_COM_GAMECONTROLLER.md](TESTE_COM_GAMECONTROLLER.md) | Roteiro: firmware 1.8 + demo 1.7+ com o GameController novo (até SET) |
 | [OPERACAO.md](OPERACAO.md) | Como iniciar/parar cada versão sem conflito, sequência no campo, segurança |
 
 ## Situação atual (17/11/2026)
