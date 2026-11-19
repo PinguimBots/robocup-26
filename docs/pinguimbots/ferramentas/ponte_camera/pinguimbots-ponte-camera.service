@@ -1,0 +1,16 @@
+# ARQUIVO NOVO - PinguimBots: inicia a ponte da camera ZED -> /boostercamera/head no boot
+# (para o app e o Booster Studio). Desativar: systemctl --user disable --now pinguimbots-ponte-camera
+[Unit]
+Description=PinguimBots - ponte da camera ZED para o app e o Booster Studio
+
+[Service]
+Type=simple
+Environment=FASTRTPS_DEFAULT_PROFILES_FILE=/opt/booster/BoosterRos2/fastdds_profile.xml
+ExecStartPre=/bin/sleep 30
+ExecStart=/bin/bash -c "source /opt/ros/humble/setup.bash && exec /usr/bin/python3 %h/PinguimBots_ponte_camera/ponte_camera_zed.py"
+WorkingDirectory=%h/PinguimBots_ponte_camera
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target

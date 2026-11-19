@@ -25,6 +25,7 @@ Ambas: Ubuntu 22.04 + ROS 2 Humble. Comunicação entre elas por DDS (FastDDS).
   tópicos, calibração e parâmetros do T1 (`robot_height 1.12`, `odom_factor 1.2`, chute visual automático desligado).
 - O que o app chama de "câmera" e de detecção de pessoas usa `/boostercamera/head/rgb`, que **não recebe imagem
   com a ZED** (o firmware só remapeia os tópicos da RealSense). Não afeta a visão de futebol, que lê `/zed/...`.
+  **Resolvido** com a ponte da câmera: ver [PONTE_CAMERA_ZED.md](PONTE_CAMERA_ZED.md).
 - Sem microfone, o agente de conversa ("Hi Chat") fala mas não ouve. Para ouvir, é preciso um microfone USB
   na placa de percepção.
 

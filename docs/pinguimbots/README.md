@@ -16,6 +16,7 @@ Documentação do time **PinguimBots** sobre o nosso Booster T1, mantida neste f
 | [CONTROLE_FIRMWARE_1.8.md](CONTROLE_FIRMWARE_1.8.md) | Mapa do controle no firmware 1.8 (oficial) + botões do cérebro do robocup e conflitos |
 | [TESTE_SEM_GAMECONTROLLER.md](TESTE_SEM_GAMECONTROLLER.md) | Roteiro: firmware 1.8 + `robocup_public`, só pelo controle, sem chute |
 | [TESTE_COM_GAMECONTROLLER.md](TESTE_COM_GAMECONTROLLER.md) | Roteiro: firmware 1.8 + demo 1.7+ com o GameController novo (até SET) |
+| [PONTE_CAMERA_ZED.md](PONTE_CAMERA_ZED.md) | Ponte que leva a imagem da ZED ao app e ao Booster Studio (inicia no boot) |
 | [guia_programacao/](guia_programacao/00_COMECE_AQUI.md) | **Guia de programação do T1** (6 partes): firmware, SDK, código de futebol por dentro, Booster Studio/agentes e como melhorar o código |
 | [OPERACAO.md](OPERACAO.md) | Como iniciar/parar cada versão sem conflito, sequência no campo, segurança |
 
@@ -30,4 +31,5 @@ Documentação do time **PinguimBots** sobre o nosso Booster T1, mantida neste f
 | Movimento/chutes com firmware 1.8 | ⏳ falta testar |
 | Botões F/P das costas | ✅ corrigido em 17/11/2026 (ver FIRMWARE_1.8_CORRECOES.md, item 6) |
 | PREP pelo controle | ✅ `LT + START` (o `RT + Y` não existe mais no firmware 1.8) |
+| Câmera no app e no Booster Studio | ✅ com a ponte da câmera (19/11/2026) |
 | Demo oficial `sandbox/support_firmware_1.7+` | ⏳ planejada para teste em pasta separada |
