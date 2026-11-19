@@ -9,9 +9,9 @@ Escrito para um programador iniciante, a partir do código real do nosso T1 (fir
 |---|---|---|
 | 0 | este | O mapa geral, o vocabulário e a ordem de estudo |
 | 1 | [01_ROBO_FIRMWARE_E_COMUNICACAO.md](01_ROBO_FIRMWARE_E_COMUNICACAO.md) | O que roda dentro do robô e como os programas conversam |
-| 2 | [02_SDK_PYTHON_E_CPP.md](02_SDK_PYTHON_E_CPP.md) | Como **o seu programa** manda o robô fazer coisas (Python e C++) |
+| 2 | [02_SDK_PYTHON_E_CPP.md](02_SDK_PYTHON_E_CPP.md) | Como **o seu programa** manda o robô fazer coisas: onde criar os arquivos, como rodar e 5 exercícios |
 | 3 | [03_DEMO_ROBOCUP_POR_DENTRO.md](03_DEMO_ROBOCUP_POR_DENTRO.md) | Como o código de futebol funciona: visão, cérebro, localização |
-| 4 | [04_BOOSTER_STUDIO_E_AGENTES.md](04_BOOSTER_STUDIO_E_AGENTES.md) | A IDE da Booster, o simulador e os "agentes" |
+| 4 | [04_BOOSTER_STUDIO_E_AGENTES.md](04_BOOSTER_STUDIO_E_AGENTES.md) | O que dá para fazer com o Booster Studio no T1: painéis, Notebook, Remote-SSH, agentes, simulador |
 | 5 | [05_COMO_MELHORAR_O_CODIGO.md](05_COMO_MELHORAR_O_CODIGO.md) | Passo a passo para escrever código novo e ideias de melhoria |
 
 ## O robô em camadas
@@ -60,7 +60,8 @@ Programar um robô é escolher **em qual camada** você vai trabalhar. Quanto ma
 
 ## Ordem de estudo sugerida
 
-1. **Ler os guias 1 e 2** e rodar os exemplos seguros do guia 2 (consultar o modo, mexer a cabeça).
+1. **Ler os guias 1 e 2** e fazer os exercícios 1 a 3 do guia 2 (pasta `~/PinguimBots_exercicios` no robô).
+   Em paralelo, abrir no Booster Studio os painéis de estado e câmera (guia 4, seção 4.3).
 2. **Ler o guia 3** com o código aberto ao lado (`~/Demo_PinguimBots/src/brain`).
 3. **Fazer o exercício do guia 5**: criar um nó novo na árvore que só **registra** informações (não move o robô).
 4. Escolher **uma** melhoria do guia 5, fazer numa pasta/ramo separado, testar parado, depois no campo.
