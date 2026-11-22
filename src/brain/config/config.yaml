@@ -119,10 +119,15 @@ brain_node:
         # image_camera_info_topic: "/zed/zed_node/left/camera_info" # zed
         # depth_image_topic: "/zed/zed_node/depth/depth_registered" # zed
         # depth_camera_info_topic: "/zed/zed_node/depth/camera_info" # zed
+        
+        # Parâmetros que vem com o código da robocup_demo
+        #image_camera_info_topic: "/boostercamera/head/rgb/camera_info" # d-robotics
+        #depth_image_topic: "/boostercamera/head/depth" # d-robotics
+        #depth_camera_info_topic: "/boostercamera/head/depth/camera_info" # d-robotics
 
-        image_camera_info_topic: "/boostercamera/head/rgb/camera_info" # d-robotics
-        depth_image_topic: "/boostercamera/head/depth" # d-robotics
-        depth_camera_info_topic: "/boostercamera/head/depth/camera_info" # d-robotics
+        # Parâmetros que estavam no Demo_PinguimBots
+        image_topic: "/boostercamera/head/rgb" #相机topic统一命名，topic名称不需更改
+        depth_image_topic: "/boostercamera/head/depth" #相机topic统一命名，topic名称不需更改
 
         
         # image_camera_info_topic: "/camera/robot0_rgbd_camera/rgb/camera_info" # simulated
