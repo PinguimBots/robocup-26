@@ -1,6 +1,6 @@
 /**
  * @file type.h
- * @brief 定义 brain 项目中用到的 struct 及 enum
+ * @brief Define as structs e enums usadas no projeto brain
  */
 #pragma once
 
@@ -15,36 +15,42 @@ using namespace std;
 
 /* ------------------ Struct ------------------------*/
 
-// 球场尺寸信息, 所有平行于底线的是长度, 所有垂直于底线的是宽度, 与线的长度无关
+// Dimensões do campo: medidas paralelas à linha de fundo são chamadas de comprimento e as perpendiculares de largura, independentemente do tamanho real das linhas
 struct FieldDimensions
 {
-    double length = 0.0;            // 球场长度
-    double width = 0.0;             // 球场宽度
-    double penaltyDist = 0.0;       // 罚球点距离底线的直线距离
-    double goalWidth = 0.0;         // 球门的宽度
-    double circleRadius = 0.0;      // 中圈的半径
-    double penaltyAreaLength = 0.0; // 禁区的长
-    double penaltyAreaWidth = 0.0;  // 禁区的宽
-    double goalAreaLength = 0.0;    // 球门区的长
-    double goalAreaWidth = 0.0;     // 球门区的宽
-                              // 注意: 禁区比球门区大；禁区和球门区的长与宽实际上要小。这个命名是为了与比赛规则相统一。
+    double length = 0.0;            // comprimento do campo
+    double width = 0.0;             // largura do campo
+    double penaltyDist = 0.0;       // distância em linha reta da marca do pênalti à linha de fundo
+    double goalWidth = 0.0;         // largura do gol
+    double circleRadius = 0.0;      // raio do círculo central
+    double penaltyAreaLength = 0.0; // comprimento da grande área
+    double penaltyAreaWidth = 0.0;  // largura da grande área
+    double goalAreaLength = 0.0;    // comprimento da pequena área
+    double goalAreaWidth = 0.0;     // largura da pequena área
+                              // Atenção: a grande área é maior que a pequena área; na prática, o "comprimento" delas é menor que a "largura". Essa nomenclatura segue as regras da competição.
 };
-const FieldDimensions FD_KIDSIZE{9, 6, 1.5, 2.6, 0.75, 2, 5, 1, 3};
+// PinguimBots: campo 9 x 6 m (kid_size). NAO e o campo da CBR 2026, que e 14 x 9 m: a CBR usa FD_ADULTSIZE abaixo
+// (field_type: adult_size no config_local.yaml).
+const FieldDimensions FD_KIDSIZE{9, 6, 1.5, 2.6, 0.6, 0.8, 3.0, 0.8, 3.0};  // comprimento, largura, pênalti, gol, raio do círculo, grande área (comp., larg.), pequena área (comp., larg.)
+// PinguimBots: campo da UFPel (mesmo valor do robocup_public). Para treinar na UFPel, troque pela linha abaixo.
+// const FieldDimensions FD_KIDSIZE{4.38, 3.79, 1, 1.02, 0.375, 1.03, 2.03, 0.54, 1.03};
+// Original da Booster na linha abaixo.
+// const FieldDimensions FD_KIDSIZE{9, 6, 1.5, 2.6, 0.75, 2, 5, 1, 3};
 // const FieldDimensions FD_ADULTSIZE{14, 9, 2.1, 2.6, 1.5, 3, 6, 1, 4};
-const FieldDimensions FD_ADULTSIZE{14.16, 9.22, 2.242, 2.6, 1.54, 3.24, 6.192, 1.345, 4};
+const FieldDimensions FD_ADULTSIZE{14, 9, 2.1, 2.6, 1.5, 3, 6, 1, 4};  // CBR 2026 (14x9): comprimento, largura, pênalti, gol, raio do círculo, grande área (comp., larg.), pequena área (comp., larg.)
 // const FieldDimensions FD_ROBOLEAGUE{22, 14, 3.6, 2.6, 2, 2.25, 6.9, 0.75, 3.9};
 // const FieldDimensions FD_ROBOLEAGUE{22, 14, 3.5, 2.6, 2, 5, 8, 2, 5};
 const FieldDimensions FD_ROBOLEAGUE{22.003, 14.126, 3.635, 2.6, 1.99, 5.221, 8.121, 2.307, 5.083};
 
-// Pose2D, 记录平面上的一个点以及朝向
+// Pose2D: um ponto no plano e sua orientação
 struct Pose2D
 {
     double x = 0;
     double y = 0;
-    double theta = 0; // rad, 从 x 轴正方向开始, 逆时针为正
+    double theta = 0; // rad, a partir do semieixo x positivo, positivo no sentido anti-horário
 };
 
-// Point, 记录一个三维点
+// Point: um ponto tridimensional
 struct Point
 {
     double x = 0.0;
@@ -52,7 +58,7 @@ struct Point
     double z = 0.0;
 };
 
-// Point2D, 记录一个二维点
+// Point2D: um ponto bidimensional
 struct Point2D
 {
     double x = 0.0;
@@ -68,42 +74,42 @@ struct BoundingBox
     double ymax = 0.0;
 };
 
-// GameObject, 用于存储比赛中的重要实体信息，如 Ball, Goalpost 等。相比于 /detect 消息中的 detection::DetectedObject，它的信息更为丰富。
+// GameObject: armazena informações de entidades importantes da partida, como Ball, Goalpost etc. É mais completo que o detection::DetectedObject da mensagem /detect.
 struct GameObject
 {
-    // --- 从 /detect 消息中获得 ---
-    string label;                // 物体被识别为什么
-    string color;                // 物体的颜色. 只用于 Opponent, 用于识别敌我
-    BoundingBox boundingBox;     // 物体在摄像头中的识别框, 左上角为 0 点, 向右为 x, 向下为 y
-    Point2D precisePixelPoint;   // 物体的精确像素点位置, 仅地面标志点有这一数据
-    double confidence = 0.0;     // 识别的置信度, 对 obstacle 来说, 是大于 0 的数字, 代表障碍网格中高于阈值的点数
-    Point posToRobot;            // 物体在机器人本体坐标系的的位置, 位置为 2D, 忽略 z 值.
+    // --- obtidos da mensagem /detect ---
+    string label;                // como o objeto foi classificado
+    string color;                // cor do objeto. Só usada para Opponent, para distinguir aliados de adversários
+    BoundingBox boundingBox;     // caixa de detecção do objeto na imagem da câmera; origem no canto superior esquerdo, x para a direita, y para baixo
+    Point2D precisePixelPoint;   // posição precisa do objeto em pixels; só os pontos de referência do campo têm este dado
+    double confidence = 0.0;     // confiança da detecção; para obstacle é um número maior que 0 que representa a quantidade de pontos acima do limiar na grade de obstáculos
+    Point posToRobot;            // posição do objeto no sistema de coordenadas do corpo do robô; posição 2D, ignora z.
 
-    // --- 在 processDetectedObject 函数中计算获得 ---
-    Point posToField;                                 // 物体在物体场坐标系的的位置, 位置为 2D, 忽略 z 值. x 向前, y 向左.
-    double range = 0.0;                               // 物体距离机器人中心在物体场平面上的投影点的直线距离
-    double pitchToRobot = 0.0, yawToRobot = 0.0;      // 物体相对于机器人正前方的 pitch 和 yaw, 单位 rad, 向下和向左为正
-    rclcpp::Time timePoint;                           // 物体被检测到的时间
+    // --- calculados na função processDetectedObject ---
+    Point posToField;                                 // posição do objeto no sistema de coordenadas do campo; posição 2D, ignora z. x para frente, y para a esquerda.
+    double range = 0.0;                               // distância em linha reta do objeto à projeção do centro do robô no plano do campo
+    double pitchToRobot = 0.0, yawToRobot = 0.0;      // pitch e yaw do objeto em relação à frente do robô, em rad; positivos para baixo e para a esquerda
+    rclcpp::Time timePoint;                           // instante em que o objeto foi detectado
 
-    // --- 通过各类不同对象的特殊处理获得, 只有部分对象有这些值 ---
-    int id = -1;    // 识别出来的 id，-1 表示尚未识别
+    // --- obtidos no tratamento específico de cada tipo de objeto; só alguns objetos têm estes valores ---
+    int id = -1;    // id identificado; -1 indica ainda não identificado
     string name;  // human readable id
-    double idConfidence = 0.0; // id 识别的置信度 [0, 1] 区间,
-    string info; // 用于存储额外的信息
+    double idConfidence = 0.0; // confiança da identificação do id, no intervalo [0, 1],
+    string info; // armazena informações extras
 
-    // 短时丢球时的可靠预测位置，仅由球路预测器维护。
+    // Posição prevista confiável quando a bola é perdida por pouco tempo; mantida apenas pelo preditor de trajetória da bola.
     Point reliablePredictPosToField;
     Point reliablePredictPosToRobot;
 };
 
-// Line, 用 x0, y0, x1, y1 表示任意坐标系下的一条直线.
+// Line: uma reta em qualquer sistema de coordenadas, representada por x0, y0, x1, y1.
 struct Line {
     double x0 = 0.0, y0 = 0.0, x1 = 0.0, y1 = 0.0;
 };
 
 struct FieldLineRef {
     std::string name;
-    double x0 = 0.0, y0 = 0.0, x1 = 0.0, y1 = 0.0; // 两端点，单位：米
+    double x0 = 0.0, y0 = 0.0, x1 = 0.0, y1 = 0.0; // os dois extremos, em metros
     bool isVertical = false;
 };
 
@@ -154,7 +160,7 @@ enum class LineType {
     PenaltyArea
 };
 
-// FieldLine 用于存储场地内的一条标线信息
+// FieldLine armazena as informações de uma linha marcada no campo
 struct FieldLine {
     Line posToField;
     Line posToRobot;
@@ -167,19 +173,19 @@ struct FieldLine {
     double confidence = 0.0;
 };
 
-// 用于存储地图中地面标志点的理论位置信息
+// Armazena a posição teórica de um ponto de referência do campo no mapa
 struct MapMarking {
     double x = 0.0;
     double y = 0.0;
     string type; // TCross | LCross | XCross | PenaltyPoint
-    string name; // name 的规则为四位string, 如 LSCL, 第一位: L|T|X|P 代表 type, 第二位: S|M|O 代表半场, 第三位: L|M|R 代表左右, 第四位: B(boundary)|P(penalty area)|G(gaol area)|C(circle) 代表点所在的方形(或圆形)
+    string name; // name é uma string de quatro caracteres, ex.: LSCL. 1º: L|T|X|P indica o type; 2º: S|M|O indica o meio-campo; 3º: L|M|R indica esquerda/meio/direita; 4º: B(boundary)|P(penalty area)|G(gaol area)|C(circle) indica o retângulo (ou círculo) onde o ponto está
 };
 
-// VisionBox 用于视野的范围
+// VisionBox representa a região do campo de visão
 struct VisionBox {
     vector<double> posToField;
     vector<double> posToRobot;
-    rclcpp::Time timePoint;                           // 物体被检测到的时间
+    rclcpp::Time timePoint;                           // instante em que o objeto foi detectado
 };
 
 struct TimestampedData {
@@ -187,31 +193,31 @@ struct TimestampedData {
     rclcpp::Time timePoint;
 };
 
-// 起身
+// Levantar-se
 struct RobotRecoveryStateData {
     uint8_t state = 0; // IS_READY = 0, IS_FALLING = 1, HAS_FALLEN = 2, IS_GETTING_UP = 3,
     uint8_t is_recovery_available = 0; // 1 for available, 0 for not available
     uint8_t current_planner_index = 0;
 };
 
-// 用于存储队友间通讯
+// Armazena a comunicação entre companheiros de equipe
 struct TMStatus {
     string role = "not initialized"; // triker, goal_keeper
-    bool isAlive = false; // 是否在场上, 且没有在罚时中, 且通讯没有丢失
+    bool isAlive = false; // se está em campo, não está cumprindo penalidade e a comunicação não foi perdida
     bool ballDetected = false;
     bool ballLocationKnown = false;
     double ballConfidence = 0.;
     double ballRange = 0.;
-    double cost = 0.; // 计算从当前状态到能踢到球的成本
-    bool isLead = true; // 是否在控球状态
-    bool isInVisualKick = false; // 是否正在执行视觉踢球，用于避免多机抢占动作
+    double cost = 0.; // custo calculado do estado atual até conseguir chutar a bola
+    bool isLead = true; // se está com a posse de bola
+    bool isInVisualKick = false; // se está executando o chute visual, para evitar que vários robôs disputem a ação
     Point ballPosToField;
     Pose2D robotPoseToField;
-    double kickDir = 0.; // 预计的踢球方向
-    double thetaRb = 0.; // 机器人到球的角度, field 坐标系
-    int cmd = 0; // 最后一次发出的指令 
-    int cmdId = 0; // 最后一次发出的指令 ID
-    rclcpp::Time timeLastCom; // 最后一次通讯时间
+    double kickDir = 0.; // direção prevista do chute
+    double thetaRb = 0.; // ângulo do robô até a bola, sistema de coordenadas field
+    int cmd = 0; // último comando enviado 
+    int cmdId = 0; // ID do último comando enviado
+    rclcpp::Time timeLastCom; // instante da última comunicação
 };
 
 

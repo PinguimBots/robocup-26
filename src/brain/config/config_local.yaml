@@ -1,0 +1,38 @@
+# ARQUIVO NOVO - PinguimBots (T1 com ZED 2i)
+# Sobrescreve apenas os campos abaixo do config.yaml da Booster (que fica intacto).
+# Depois de alterar este arquivo, recompilar: ./scripts/build.sh --packages-select brain
+brain_node:
+  ros__parameters:
+    game:
+      team_id: 42               # igual ao robocup_public do robo; no GameController: competicao middle_foundation
+      player_id: 2
+      field_type: "adult_size"  # adult_size = campo 14x9 da CBR (FD_ADULTSIZE em types.h)
+      player_role: "striker"
+      player_start_pos: "left"
+      treat_person_as_robot: false
+      number_of_players: 3
+
+    # Parametros do T1 (README da Booster) + velocidades conservadoras do robocup_public
+    robot:
+      robot_height: 1.12
+      odom_factor: 1.2
+      vx_factor: 0.50
+      vx_limit: 1.0
+      vy_limit: 0.4
+      vtheta_limit: 1.2
+
+    strategy:
+      enable_auto_visual_kick: false   # README da Booster: desligar no T1
+
+    vision:
+      image_topic: "/zed/zed_node/left/image_rect_color"
+      depth_image_topic: "/zed/zed_node/depth/depth_registered"
+      cam_pixel_width: 640.
+      cam_pixel_height: 360.
+      cam_fov_x: 101.5          # calculado de fx=261.3 em 640 px
+      cam_fov_y: 69.1           # calculado de fy=261.3 em 360 px
+
+    game_control_ip: "10.250.101.203"   # IP do PC que roda o GameController
+
+    sound:
+      enable: false             # sem microfone/alto-falante dedicados

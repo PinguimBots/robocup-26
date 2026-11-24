@@ -1,0 +1,50 @@
+camera:
+  type: zed
+  camera_info_topic: /zed/zed_node/left/camera_info
+  intrin_wait_timeout_sec: 5.0
+  intrin:
+    fx: 260.843597
+    fy: 260.843597
+    cx: 323.138306
+    cy: 178.887558
+    distortion_model: 0
+    distortion_coeffs:
+      []
+  extrin:
+    -
+      - -0.0101161664
+      - -0.0194779802
+      - 0.999759138
+      - -0.00656405184
+    -
+      - -0.999945104
+      - -0.00252527907
+      - -0.0101672467
+      - 0.030163845
+    -
+      - 0.00272270781
+      - -0.99980706
+      - -0.0194513649
+      - -0.0574439429
+    -
+      - 0
+      - 0
+      - 0
+      - 1
+  pitch_compensation: 0
+  yaw_compensation: 0
+  z_compensation: 0
+detection_model:
+  model_path: ./src/vision/model/PinguimBots_det_best_orin_10.3.engine
+segmentation_model:
+  model_path: ./src/vision/model/PinguimBots_seg_best_seg_orin_10.3.engine
+use_depth: false
+ball_pose_estimator:
+  use_depth: false
+  ball_size: 5
+  x_compensation: 0.0
+  y_compensation: 0.0
+calibration:
+  handeye:
+    calibration_time: 2026-11-24-07-29-56
+    reprojection_error: 6.8326185654611713

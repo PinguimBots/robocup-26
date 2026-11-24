@@ -336,8 +336,9 @@ void VisionNode::Init(const std::string &cfg_template_path, const std::string &c
     std::string color_topic;
     std::string depth_topic;
     if (camera_type_.find("zed") != std::string::npos) {
-        color_topic = "/boostercamera/head/rgb";
-        depth_topic = "/boostercamera/head/depth";
+        // PinguimBots: no T1 com ZED 2i (firmware 1.6 e 1.8) a imagem sai em /zed/zed_node/*
+        color_topic = "/zed/zed_node/left/image_rect_color";
+        depth_topic = "/zed/zed_node/depth/depth_registered";
     } else if (camera_type_ == "d-robotics") {
         color_topic = "/boostercamera/head/rgb";
         depth_topic = "/boostercamera/head/depth";
