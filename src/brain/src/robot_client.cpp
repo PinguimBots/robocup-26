@@ -50,6 +50,8 @@ int RobotClient::standUp()
 int RobotClient::RLVisionKick(bool start)
 {
     booster_interface::msg::BoosterApiReqMsg msg;
+    //Pinguim Gambi para compilar
+    /*
     msg.api_id = static_cast<int64_t>(booster::robot::b1::LocoApiId::kVisualKick);
     nlohmann::json body;
     body["start"] = start;
@@ -60,7 +62,7 @@ int RobotClient::RLVisionKick(bool start)
         : booster::robot::b1::VisualKickVersion::kV2;  // Invalid values fall back to kV2.
     body["version"] = static_cast<int>(vkEnum);
     msg.body = body.dump();
-    std::cout << "RobotClient::RLVisionKick called with start=" << (start ? "true" : "false") << std::endl;
+    std::cout << "RobotClient::RLVisionKick called with start=" << (start ? "true" : "false") << std::endl;*/
     return call(msg);
 }
 
@@ -76,8 +78,9 @@ int RobotClient::changeRobocupMode()
 {
     std::cout << "RobotClient::changeRobocupMode switch to kSoccer and exit VisualKick(false)" << std::endl;
 
-    int ret = call(booster_interface::CreateChangeModeMsg(booster::robot::RobotMode::kSoccer));
-    if (ret != 0) return ret;
+    //Pinguim gambi para compilar
+    //int ret = call(booster_interface::CreateChangeModeMsg(booster::robot::RobotMode::kSoccer));
+   // if (ret != 0) return ret;
 
     return RLVisionKick(false);
 }
