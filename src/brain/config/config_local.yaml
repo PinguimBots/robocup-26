@@ -22,7 +22,7 @@ brain_node:
       vtheta_limit: 1.2
 
     strategy:
-      goalie_visual_kick_max_ball_range: 0.0
+      goalie_visual_kick_max_ball_range: 2.0
       cooperation:
         enable_role_switch: false  # PinguimBots: papel fixo pelo config (1 = goleiro, 2 e 3 = atacantes)
       enable_auto_visual_kick: false   # README da Booster: desligar no T1
