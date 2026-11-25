@@ -8,7 +8,7 @@ brain_node:
       player_id: 1  # PinguimBots: 1 = goleiro; 2 e 3 = atacantes
       field_type: "adult_size"  # adult_size = campo 14x9 da CBR (FD_ADULTSIZE em types.h)
       player_role: "goal_keeper"  # PinguimBots: goal_keeper no jogador 1; striker nos 2 e 3
-      player_start_pos: "left"
+      player_start_pos: "right"
       treat_person_as_robot: false
       number_of_players: 3  # PinguimBots: robos do time em campo
 

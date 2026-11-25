@@ -25,7 +25,8 @@
                <CalcKickDir />
                <Sequence>
                   <ReactiveSequence _while="goalie_mode == 'block_kick' || goalie_mode == 'intercept_kick'">
-                     <Kick speed_limit="0.8" min_msec_kick="600"/> <!-- PinguimBots: no firmware 1.6 o chute real trava o robo; goleiro empurra a bola andando -->
+                     <Chase _while="ball_range &gt; 0.8" vx_limit="1.0" vy_limit="0.5" vtheta_limit="1.5" dist="0.1" safe_dist="0.5" /> <!-- PinguimBots: anda ate a bola -->
+                     <Kick _while="ball_range &lt;= 0.8" speed_limit="0.8" min_msec_kick="600"/> <!-- PinguimBots: no firmware 1.6 o chute real trava o robo; goleiro empurra a bola andando -->
                   </ReactiveSequence>
                   <ReactiveSequence _while="goalie_mode == 'guard_idle'">
                      <GoalieIdleHome dist_to_goalline="1.0" vx_limit="0.7" vy_limit="0.5"

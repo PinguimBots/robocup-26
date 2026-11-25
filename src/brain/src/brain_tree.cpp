@@ -1887,7 +1887,10 @@ NodeStatus Analyze2::tick()
         brain->config->fieldDimensions.penaltyAreaLength + 0.4;
     const bool sessionActive = active && visualKickMode && !forceIdle &&
         source.usable && source.field.x <= sessionMaxX;
-    const bool visualKickReady = baseReady || sessionActive;
+    // PinguimBots: bola perto e na nossa area -> goleiro vai nela, sem depender de lider/custo/direcao
+    const bool closeBallOverride = !forceIdle && source.real && cooldownOk &&
+        source.range <= 1.5 && source.field.x <= sessionMaxX;
+    const bool visualKickReady = baseReady || sessionActive || closeBallOverride;
 
     if (!sessionActive && baseReady) {
         _interceptKickDisabled = false;
