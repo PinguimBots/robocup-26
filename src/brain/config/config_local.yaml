@@ -5,12 +5,12 @@ brain_node:
   ros__parameters:
     game:
       team_id: 42               # igual ao robocup_public do robo; no GameController: competicao middle_foundation
-      player_id: 2
+      player_id: 1  # PinguimBots: 1 = goleiro; 2 e 3 = atacantes
       field_type: "adult_size"  # adult_size = campo 14x9 da CBR (FD_ADULTSIZE em types.h)
-      player_role: "goal_keeper"
+      player_role: "goal_keeper"  # PinguimBots: goal_keeper no jogador 1; striker nos 2 e 3
       player_start_pos: "left"
       treat_person_as_robot: false
-      number_of_players: 3
+      number_of_players: 3  # PinguimBots: robos do time em campo
 
     # Parametros do T1 (README da Booster) + velocidades conservadoras do robocup_public
     robot:
@@ -24,7 +24,7 @@ brain_node:
     strategy:
       goalie_visual_kick_max_ball_range: 0.0
       cooperation:
-        enable_role_switch: false
+        enable_role_switch: false  # PinguimBots: papel fixo pelo config (1 = goleiro, 2 e 3 = atacantes)
       enable_auto_visual_kick: false   # README da Booster: desligar no T1
 
     vision:
@@ -35,7 +35,7 @@ brain_node:
       cam_fov_x: 101.5          # calculado de fx=261.3 em 640 px
       cam_fov_y: 69.1           # calculado de fy=261.3 em 360 px
 
-    game_control_ip: "192.168.10.124"  # PinguimBots: IP do PC que roda o GameController
+    game_control_ip: "10.105.10.10"  # PinguimBots: IP do PC que roda o GameController
 
     sound:
       enable: false             # sem microfone/alto-falante dedicados
