@@ -22,7 +22,7 @@ def generate_launch_description():
 
                     # 只接收指定
                     "ip_white_list": [
-                        "10.250.101.203", "192.168.10.124", "10.250.243.92",   # PinguimBots: IPs aceitos do GameController
+                        "10.105.101.203", "10.105.101.203", "10.250.101.203", "192.168.10.124", "10.250.243.92",   # PinguimBots: IPs aceitos do GameController
                     ],
                 }
             ]

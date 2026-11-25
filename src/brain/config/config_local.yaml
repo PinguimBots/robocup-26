@@ -7,7 +7,7 @@ brain_node:
       team_id: 42               # igual ao robocup_public do robo; no GameController: competicao middle_foundation
       player_id: 2
       field_type: "adult_size"  # adult_size = campo 14x9 da CBR (FD_ADULTSIZE em types.h)
-      player_role: "striker"
+      player_role: "goal_keeper"
       player_start_pos: "left"
       treat_person_as_robot: false
       number_of_players: 3
@@ -22,6 +22,9 @@ brain_node:
       vtheta_limit: 1.2
 
     strategy:
+      goalie_visual_kick_max_ball_range: 0.0
+      cooperation:
+        enable_role_switch: false
       enable_auto_visual_kick: false   # README da Booster: desligar no T1
 
     vision:
@@ -32,7 +35,7 @@ brain_node:
       cam_fov_x: 101.5          # calculado de fx=261.3 em 640 px
       cam_fov_y: 69.1           # calculado de fy=261.3 em 360 px
 
-    game_control_ip: "10.250.101.203"   # IP do PC que roda o GameController
+    game_control_ip: "192.168.10.124"  # PinguimBots: IP do PC que roda o GameController
 
     sound:
       enable: false             # sem microfone/alto-falante dedicados
